@@ -1,5 +1,6 @@
 """Local dashboard bootstrap. Only processes recorded by this launcher are stopped."""
 import json
+from http.client import HTTPException as HTTPProtocolError
 import logging
 import os
 from pathlib import Path
@@ -35,14 +36,14 @@ def request(url, method='GET'):
 def backend_ready(url=None):
     try:
         return json.loads(request((url or BASE) + '/api/health')).get('application') == 'project-launcher'
-    except (OSError, ValueError, URLError):
+    except (OSError, ValueError, URLError, HTTPProtocolError):
         return False
 
 
 def frontend_ready(url=None):
     try:
         return 'Launchpad · Project Launcher' in request(url or settings.frontend_url)
-    except (OSError, URLError):
+    except (OSError, URLError, HTTPProtocolError):
         return False
 
 

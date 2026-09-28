@@ -1,4 +1,5 @@
 import codecs
+from http.client import HTTPException as HTTPProtocolError
 import logging
 from logging.handlers import RotatingFileHandler
 import os
@@ -50,7 +51,7 @@ def http_ready(url):
     except HTTPError as exc:
         # Auth and missing root routes still prove that the HTTP server is up.
         return exc.code < 500
-    except (URLError, OSError, ValueError):
+    except (URLError, OSError, ValueError, HTTPProtocolError):
         return False
 
 

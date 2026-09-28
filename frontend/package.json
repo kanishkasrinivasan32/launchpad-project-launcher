@@ -16,7 +16,7 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.51.0",
-    "@vitejs/plugin-react": "^5.0.0",
+    "@vitejs/plugin-react": "^6.1.1",
     "autoprefixer": "^10.4.21",
     "postcss": "^8.5.3",
     "prettier": "^3.9.9",
